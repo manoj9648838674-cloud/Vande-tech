@@ -1,1 +1,338 @@
-# Vande-tech
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vande Tech - Innovating India's Future</title>
+    <style>
+        :root[data-theme="dark"] {
+            --bg-primary: #0A192F;
+            --bg-secondary: #112240;
+            --bg-card: #1D2D50;
+            --text-primary: #F0F4F8;
+            --text-muted: #8892B0;
+            --accent-orange: #FF9933;
+            --accent-gold: #FFD700;
+            --accent-blue: #00BFFF;
+            --border-color: #233554;
+            --shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+        }
+        :root[data-theme="light"] {
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #F0F4F8;
+            --text-primary: #0A192F;
+            --text-muted: #4A5568;
+            --accent-orange: #E67E22;
+            --accent-gold: #D4AF37;
+            --accent-blue: #0077CC;
+            --border-color: #CBD5E0;
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s, color 0.3s; }
+        body { background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; padding-bottom: 50px; }
+        
+        /* Header */
+        header { background: var(--bg-secondary); border-bottom: 2px solid var(--accent-orange); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+        .logo-box { display: flex; align-items: center; gap: 12px; }
+        .logo-svg { width: 45px; height: 55px; fill: var(--accent-orange); filter: drop-shadow(0 0 5px rgba(255,153,51,0.5)); }
+        .logo-text h1 { font-size: 1.4rem; color: var(--accent-orange); letter-spacing: 1px; font-weight: 800; }
+        .logo-text p { font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 0.5px; }
+        nav { display: flex; gap: 12px; align-items: center; }
+        nav a { color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
+        nav a:hover { color: var(--accent-orange); }
+        .btn { background: linear-gradient(135deg, var(--accent-orange), #D35400); color: #fff; border: none; padding: 8px 16px; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Hero */
+        .hero { text-align: center; padding: 50px 20px; background: radial-gradient(circle at center, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
+        .hero h2 { font-size: 2.2rem; margin-bottom: 12px; color: var(--accent-gold); }
+        .hero p { max-width: 650px; margin: 0 auto 20px; color: var(--text-muted); font-size: 1rem; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .section-title { text-align: center; margin: 40px 0 20px; color: var(--accent-orange); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent-gold); margin: 8px auto 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; box-shadow: var(--shadow); }
+
+        /* Simulator */
+        .sim-box { background: var(--bg-secondary); border: 2px solid var(--accent-blue); border-radius: 12px; padding: 25px; text-align: center; }
+        .circuit-canvas { background: var(--bg-primary); height: 160px; border-radius: 8px; border: 1px dashed var(--accent-blue); margin: 15px 0; display: flex; justify-content: space-around; align-items: center; }
+        .led-indicator { width: 35px; height: 35px; border-radius: 50%; background: #333; box-shadow: 0 0 5px #000; }
+        .led-on { background: #FF0000 !important; box-shadow: 0 0 25px #FF0000, 0 0 10px #FF9933 !important; }
+        .servo-arm { width: 60px; height: 8px; background: var(--accent-gold); transform-origin: left center; transition: transform 0.3s ease; border-radius: 4px; }
+
+        /* Form Controls & Inputs */
+        input, select { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); }
+        .resistor-display { height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: space-around; margin: 15px 0; border: 2px solid var(--accent-gold); background: #D2B48C; }
+        .band { width: 15%; height: 100%; }
+
+        /* Quiz */
+        .quiz-option { display: block; width: 100%; text-align: left; padding: 10px; margin: 8px 0; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; cursor: pointer; }
+        .quiz-option:hover { border-color: var(--accent-orange); }
+
+        /* ID Card Generator */
+        .id-card { background: linear-gradient(135deg, #0A192F, #1E3A8A); border: 2px solid var(--accent-gold); border-radius: 12px; padding: 20px; max-width: 380px; margin: 20px auto 0; color: #fff; text-align: left; box-shadow: var(--shadow); }
+        .id-card .id-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-bottom: 12px; }
+        .input-group { max-width: 380px; margin: 0 auto; }
+
+        footer { text-align: center; padding: 25px; background: var(--bg-secondary); border-top: 1px solid var(--border-color); margin-top: 50px; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-box">
+            <svg class="logo-svg" viewBox="0 0 100 120">
+                <path d="M50 5 L65 25 L85 25 L70 45 L80 70 L50 60 L20 70 L30 45 L15 25 L35 25 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="90" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M50 75 L50 105 M35 90 L65 90" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <div class="logo-text">
+                <h1>VANDE TECH</h1>
+                <p>INNOVATING INDIA'S FUTURE</p>
+            </div>
+        </div>
+        <nav>
+            <a href="#lab">Lab</a>
+            <a href="#arcade">Arcade</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#idpass">ID Pass</a>
+            <button class="btn" onclick="toggleTheme()">Theme 🌓</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Zero Investment. Infinite Innovation.</h2>
+        <p>Swadeshi youth startup hub for robotics, electronics, software engineering, and school science projects.</p>
+        <a href="#arcade" class="btn">Electronics Arcade & Calculators 🎮</a>
+    </section>
+
+    <div class="container">
+        <!-- Circuit Simulator -->
+        <section id="lab">
+            <h2 class="section-title">Arduino Virtual Workbench</h2>
+            <div class="sim-box">
+                <div class="circuit-canvas">
+                    <div>
+                        <p style="font-size:0.8rem; color:var(--text-muted);">DC Power</p>
+                        <strong id="v-out">5.0 V</strong>
+                    </div>
+                    <div>
+                        <p style="font-size:0.8rem; color:var(--text-muted);">LED Light</p>
+                        <div id="led" class="led-indicator"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.8rem; color:var(--text-muted);">Servo Arm</p>
+                        <div id="servo" class="servo-arm"></div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+                    <button class="btn" onclick="togglePower()">Toggle Power 🔌</button>
+                    <div>
+                        <label>Voltage: </label>
+                        <input type="range" min="1" max="12" value="5" oninput="updateVoltage(this.value)" style="width:150px;">
+                    </div>
+                    <div>
+                        <label>Servo Angle: </label>
+                        <input type="range" min="0" max="180" value="0" oninput="updateServo(this.value)" style="width:150px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Electronics Arcade & Calculators -->
+        <section id="arcade">
+            <h2 class="section-title">Electronics Arcade & Calculators</h2>
+            <div class="grid">
+                <!-- Ohm's Law Master -->
+                <div class="card">
+                    <h3>⚡ Ohm's Law Master</h3>
+                    <label>Voltage (V):</label>
+                    <input type="number" id="ohm-v" value="5" oninput="calcOhm()">
+                    <label>Current (I in Amps):</label>
+                    <input type="number" id="ohm-i" value="0.02" step="0.001" oninput="calcOhm()">
+                    <div style="background:var(--bg-primary); padding:10px; border-radius:6px; margin-top:5px;">
+                        <p>Resistance (R): <strong id="res-r" style="color:var(--accent-gold);">250 Ω</strong></p>
+                        <p>Power (P): <strong id="res-p" style="color:var(--accent-orange);">0.10 W</strong></p>
+                    </div>
+                </div>
+
+                <!-- LED Series Resistor Finder -->
+                <div class="card">
+                    <h3>💡 LED Series Resistor Finder</h3>
+                    <label>Source Voltage (Vs):</label>
+                    <input type="number" id="led-vs" value="5" oninput="calcLedRes()">
+                    <label>LED Type / Forward Voltage (Vf):</label>
+                    <select id="led-vf" onchange="calcLedRes()">
+                        <option value="2.0">Standard Red LED (2.0V)</option>
+                        <option value="3.2">Standard Blue/White LED (3.2V)</option>
+                        <option value="2.2">Standard Green LED (2.2V)</option>
+                    </select>
+                    <label>LED Current (mA):</label>
+                    <input type="number" id="led-ma" value="20" oninput="calcLedRes()">
+                    <div style="background:var(--bg-primary); padding:10px; border-radius:6px; margin-top:5px;">
+                        <p>Recommended Resistor: <strong id="led-res-val" style="color:var(--accent-gold);">150 Ω</strong></p>
+                        <p>Power Dissipation: <strong id="led-power-val" style="color:var(--accent-orange);">0.06 W</strong></p>
+                    </div>
+                </div>
+
+                <!-- 4-Band Resistor Color Code Calculator -->
+                <div class="card">
+                    <h3>🎨 4-Band Resistor Code</h3>
+                    <div class="resistor-display">
+                        <div id="b1" class="band" style="background:red;"></div>
+                        <div id="b2" class="band" style="background:purple;"></div>
+                        <div id="b3" class="band" style="background:brown;"></div>
+                        <div id="b4" class="band" style="background:gold;"></div>
+                    </div>
+                    <label>Band 1:</label>
+                    <select id="sel-b1" onchange="calcColorCode()">
+                        <option value="1">Brown (1)</option>
+                        <option value="2" selected>Red (2)</option>
+                        <option value="4">Yellow (4)</option>
+                        <option value="10">Violet (7)</option>
+                    </select>
+                    <label>Band 2:</label>
+                    <select id="sel-b2" onchange="calcColorCode()">
+                        <option value="0">Black (0)</option>
+                        <option value="2">Red (2)</option>
+                        <option value="7" selected>Violet (7)</option>
+                    </select>
+                    <label>Multiplier:</label>
+                    <select id="sel-b3" onchange="calcColorCode()">
+                        <option value="1" selected>Brown (x10)</option>
+                        <option value="2">Red (x100)</option>
+                        <option value="3">Orange (x1k)</option>
+                    </select>
+                    <div style="background:var(--bg-primary); padding:10px; border-radius:6px; margin-top:5px;">
+                        <p>Total Resistance: <strong id="color-res-val" style="color:var(--accent-gold);">270 Ω ±5%</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title">Vande Tech Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🤖 Arduino Servo Automation</h3>
+                    <p>Programming angular servo control loops in C++.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Parallel Switchboard</h3>
+                    <p>Parallel 2-socket 2-switch electrical board project model.</p>
+                </div>
+                <div class="card">
+                    <h3>🧪 CuSO4 Crystallization</h3>
+                    <p>Copper Sulfate chemical crystal growth tracker.</p>
+                </div>
+                <div class="card">
+                    <h3>💻 Swadeshi OS Web Concept</h3>
+                    <p>Lightweight desktop UI concept designed for Indian students.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Swadeshi Quiz -->
+        <section id="quiz">
+            <h2 class="section-title">Swadeshi Tech Quiz</h2>
+            <div class="card" style="max-width:600px; margin:0 auto;">
+                <p id="quiz-q" style="font-size:1.1rem; font-weight:bold; margin-bottom:15px;">1. What component controls precise mechanical angles in robotics?</p>
+                <div id="quiz-opts">
+                    <button class="quiz-option" onclick="checkAnswer(true)">A) Servo Motor</button>
+                    <button class="quiz-option" onclick="checkAnswer(false)">B) Resistor</button>
+                    <button class="quiz-option" onclick="checkAnswer(false)">C) Capacitor</button>
+                </div>
+                <p id="quiz-feedback" style="margin-top:10px; font-weight:bold;"></p>
+            </div>
+        </section>
+
+        <!-- ID Card Generator -->
+        <section id="idpass">
+            <h2 class="section-title">Vande Tech Founder Pass</h2>
+            <div class="input-group">
+                <input type="text" id="in-name" placeholder="Full Name" value="Santesh">
+                <input type="text" id="in-school" placeholder="School Name" value="39 SSB Camp Kendriya Vidyalaya Gadania">
+                <input type="text" id="in-roll" placeholder="Roll Number / Class" value="Class 6th">
+                <input type="email" id="in-gmail" placeholder="Gmail Address" value="vandetech@gmail.com">
+                <button class="btn" onclick="updatePass()" style="width:100%;">Generate Badge 🪪</button>
+            </div>
+
+            <div class="id-card">
+                <div class="id-header">
+                    <strong>VANDE TECH FOUNDER PASS</strong>
+                    <small>VT-2026</small>
+                </div>
+                <h3 id="card-name" style="color:var(--accent-gold);">Santesh</h3>
+                <p id="card-school" style="font-size:0.85rem; color:#A0AEC0;">School: 39 SSB Camp KV Gadania</p>
+                <p id="card-roll" style="font-size:0.85rem; color:#A0AEC0;">Roll No / Class: Class 6th</p>
+                <p id="card-gmail" style="font-size:0.85rem; color:#A0AEC0;">Gmail: vandetech@gmail.com</p>
+                <div style="margin-top:15px; font-size:0.75rem; color:var(--accent-orange); border-top:1px dashed rgba(255,255,255,0.2); padding-top:8px;">
+                    Official Swadeshi Technology Pioneer Badge
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Vande Tech. Founded by Santesh | Made with Pride in India 🇮🇳</p>
+    </footer>
+
+    <script>
+        let pwr = false;
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+        function togglePower() {
+            pwr = !pwr;
+            document.getElementById('led').className = pwr ? 'led-indicator led-on' : 'led-indicator';
+        }
+        function updateVoltage(val) { document.getElementById('v-out').innerText = val + ' V'; }
+        function updateServo(val) { document.getElementById('servo').style.transform = `rotate(${val}deg)`; }
+        
+        function calcOhm() {
+            const v = parseFloat(document.getElementById('ohm-v').value) || 0;
+            const i = parseFloat(document.getElementById('ohm-i').value) || 0.001;
+            const r = v / i;
+            const p = v * i;
+            document.getElementById('res-r').innerText = r.toFixed(1) + " Ω";
+            document.getElementById('res-p').innerText = p.toFixed(2) + " W";
+        }
+
+        function calcLedRes() {
+            const vs = parseFloat(document.getElementById('led-vs').value) || 0;
+            const vf = parseFloat(document.getElementById('led-vf').value) || 0;
+            const ma = parseFloat(document.getElementById('led-ma').value) || 1;
+            const i = ma / 1000;
+            const r = Math.max(0, (vs - vf) / i);
+            const p = Math.max(0, (vs - vf) * i);
+            document.getElementById('led-res-val').innerText = Math.round(r) + " Ω";
+            document.getElementById('led-power-val').innerText = p.toFixed(2) + " W";
+        }
+
+        function calcColorCode() {
+            const b1 = document.getElementById('sel-b1').value;
+            const b2 = document.getElementById('sel-b2').value;
+            const b3 = parseInt(document.getElementById('sel-b3').value);
+            const val = (parseInt(b1 + b2) * Math.pow(10, b3));
+            document.getElementById('color-res-val').innerText = val + " Ω ±5%";
+        }
+
+        function checkAnswer(correct) {
+            const fb = document.getElementById('quiz-feedback');
+            if(correct) { fb.innerText = "Correct Answer! 🎉"; fb.style.color = "#00FF66"; }
+            else { fb.innerText = "Incorrect! Try again. ❌"; fb.style.color = "#FF3333"; }
+        }
+
+        function updatePass() {
+            document.getElementById('card-name').innerText = document.getElementById('in-name').value || 'Santesh';
+            document.getElementById('card-school').innerText = 'School: ' + (document.getElementById('in-school').value || '39 SSB Camp KV Gadania');
+            document.getElementById('card-roll').innerText = 'Roll No / Class: ' + (document.getElementById('in-roll').value || 'Class 6th');
+            document.getElementById('card-gmail').innerText = 'Gmail: ' + (document.getElementById('in-gmail').value || 'vandetech@gmail.com');
+        }
+    </script>
+</body>
+</html>
+  
